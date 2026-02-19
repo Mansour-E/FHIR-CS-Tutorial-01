@@ -8,4 +8,8 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <PackageReference Include="Hl7.Fhir.R4" Version="6.0.2" />
+  </ItemGroup>
+
 </Project>

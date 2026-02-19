@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\mansu\\OneDrive\\Desktop\\FHIR\\FHIR-CS-Tutorial-01\\src\\fhir-cs-tutorial-01.csproj": {}
+    "c:\\Users\\mansu\\OneDrive\\Desktop\\FHIR\\FHIR-CS-Tutorial-01\\src\\fhir-cs-tutorial-01.csproj": {}
   },
   "projects": {
-    "C:\\Users\\mansu\\OneDrive\\Desktop\\FHIR\\FHIR-CS-Tutorial-01\\src\\fhir-cs-tutorial-01.csproj": {
+    "c:\\Users\\mansu\\OneDrive\\Desktop\\FHIR\\FHIR-CS-Tutorial-01\\src\\fhir-cs-tutorial-01.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\mansu\\OneDrive\\Desktop\\FHIR\\FHIR-CS-Tutorial-01\\src\\fhir-cs-tutorial-01.csproj",
+        "projectUniqueName": "c:\\Users\\mansu\\OneDrive\\Desktop\\FHIR\\FHIR-CS-Tutorial-01\\src\\fhir-cs-tutorial-01.csproj",
         "projectName": "fhir-cs-tutorial-01",
-        "projectPath": "C:\\Users\\mansu\\OneDrive\\Desktop\\FHIR\\FHIR-CS-Tutorial-01\\src\\fhir-cs-tutorial-01.csproj",
+        "projectPath": "c:\\Users\\mansu\\OneDrive\\Desktop\\FHIR\\FHIR-CS-Tutorial-01\\src\\fhir-cs-tutorial-01.csproj",
         "packagesPath": "C:\\Users\\mansu\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\mansu\\OneDrive\\Desktop\\FHIR\\FHIR-CS-Tutorial-01\\src\\obj\\",
+        "outputPath": "c:\\Users\\mansu\\OneDrive\\Desktop\\FHIR\\FHIR-CS-Tutorial-01\\src\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\mansu\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -45,6 +45,12 @@
       "frameworks": {
         "net10.0": {
           "targetAlias": "net10.0",
+          "dependencies": {
+            "Hl7.Fhir.R4": {
+              "target": "Package",
+              "version": "[6.0.2, )"
+            }
+          },
           "imports": [
             "net461",
             "net462",

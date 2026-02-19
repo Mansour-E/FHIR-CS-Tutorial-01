@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("fhir-cs-tutorial-01")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+b4687d77d9af0f786462634ea517c523d63f51de")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+32dd562114bbeec644cc50ce4e585974712bff67")]
 [assembly: System.Reflection.AssemblyProductAttribute("fhir-cs-tutorial-01")]
 [assembly: System.Reflection.AssemblyTitleAttribute("fhir-cs-tutorial-01")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
