@@ -1,0 +1,30 @@
+{
+  "version": 2,
+  "dgSpecHash": "BCanItAf0vU=",
+  "success": true,
+  "projectFilePath": "C:\\Users\\mansu\\OneDrive\\Desktop\\FHIR\\FHIR-CS-Tutorial-01\\src\\fhir-cs-tutorial-01.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\mansu\\.nuget\\packages\\hl7.fhir.elementmodel\\1.9.0\\hl7.fhir.elementmodel.1.9.0.nupkg.sha512",
+    "C:\\Users\\mansu\\.nuget\\packages\\hl7.fhir.r4\\1.9.0\\hl7.fhir.r4.1.9.0.nupkg.sha512",
+    "C:\\Users\\mansu\\.nuget\\packages\\hl7.fhir.serialization\\1.9.0\\hl7.fhir.serialization.1.9.0.nupkg.sha512",
+    "C:\\Users\\mansu\\.nuget\\packages\\hl7.fhir.support\\1.9.0\\hl7.fhir.support.1.9.0.nupkg.sha512",
+    "C:\\Users\\mansu\\.nuget\\packages\\hl7.fhir.support.poco\\1.9.0\\hl7.fhir.support.poco.1.9.0.nupkg.sha512",
+    "C:\\Users\\mansu\\.nuget\\packages\\hl7.fhirpath\\1.9.0\\hl7.fhirpath.1.9.0.nupkg.sha512",
+    "C:\\Users\\mansu\\.nuget\\packages\\newtonsoft.json\\11.0.2\\newtonsoft.json.11.0.2.nupkg.sha512",
+    "C:\\Users\\mansu\\.nuget\\packages\\system.componentmodel.annotations\\4.5.0\\system.componentmodel.annotations.4.5.0.nupkg.sha512"
+  ],
+  "logs": [
+    {
+      "code": "NU1903",
+      "level": "Warning",
+      "message": "Package 'Newtonsoft.Json' 11.0.2 has a known high severity vulnerability, https://github.com/advisories/GHSA-5crp-9r3c-p9vr",
+      "projectPath": "C:\\Users\\mansu\\OneDrive\\Desktop\\FHIR\\FHIR-CS-Tutorial-01\\src\\fhir-cs-tutorial-01.csproj",
+      "warningLevel": 1,
+      "filePath": "C:\\Users\\mansu\\OneDrive\\Desktop\\FHIR\\FHIR-CS-Tutorial-01\\src\\fhir-cs-tutorial-01.csproj",
+      "libraryId": "Newtonsoft.Json",
+      "targetGraphs": [
+        "net10.0"
+      ]
+    }
+  ]
+}
