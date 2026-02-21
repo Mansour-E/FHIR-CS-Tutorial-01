@@ -27,6 +27,7 @@ namespace fhir_cs_tutorial_01
             Bundle patientBundle = fhirClient.Search<Patient>(new string[] {"name=test"});
 
             int patientNumber = 0;
+            List<string> patientsWithEncounters = new List<string>();
 
             while (patientBundle != null)
             {
@@ -35,21 +36,48 @@ namespace fhir_cs_tutorial_01
                 // list each patient in the bundle
                 foreach (Bundle.EntryComponent entry in patientBundle.Entry)
                 {
-                    System.Console.WriteLine($" - Entry{patientNumber , 3}:{entry.FullUrl}");
-                    //System.Console.WriteLine($"- {patient.Id,20} ");
+
+                    //
+                    //
 
                     if (entry.Resource != null)
                     {
                         Patient patient = (Patient)entry.Resource;
-                        System.Console.WriteLine($" - Id: {patient.Id}");
+                        //System.Console.WriteLine($" - Id: {patient.Id}");
+
+                        Bundle encounterBundle = fhirClient.Search<Encounter>(new string[]{$"patient=Patient/{patient.Id}", });
+
+                        if (encounterBundle.Total == 0)
+                        {
+                            continue;
+                        }
+
+                        patientsWithEncounters.Add(patient.Id);
+
+                        System.Console.WriteLine($" - Entry{patientNumber, 3}:{entry.FullUrl}");
+                        System.Console.WriteLine($"- {patient.Id} ");
 
                         if (patient.Name.Count > 0)
                         {
                            System.Console.WriteLine($" - Name: {patient.Name[0].ToString()}");
                         }
+
+                        Console.WriteLine($" - Encounter Total: {encounterBundle.Total} Entry count: {patientBundle.Entry.Count}");
+
                     }
 
                     patientNumber ++;
+
+                    if (patientsWithEncounters.Count >= 3)
+                    {
+                        break;
+                    }
+
+                }
+
+                if (patientsWithEncounters.Count >= 3)
+                {
+                    break;
                 }
 
                 // get more result
