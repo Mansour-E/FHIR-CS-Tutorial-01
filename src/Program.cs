@@ -25,17 +25,37 @@ namespace fhir_cs_tutorial_01
             
 
             Bundle patientBundle = fhirClient.Search<Patient>(new string[] {"name=test"});
-            Console.WriteLine($"Total: {patientBundle.Total} Entry count: {patientBundle.Entry.Count}");
 
             int patientNumber = 0;
 
-            foreach (Bundle.EntryComponent entry in patientBundle.Entry)
+            while (patientBundle != null)
             {
-                System.Console.WriteLine($" - Entry {patientNumber, 3}:{entry.FullUrl}");
-                //System.Console.WriteLine($"- {patient.Id,20} ");
+                Console.WriteLine($"Total: {patientBundle.Total} Entry count: {patientBundle.Entry.Count}");
 
-                patientNumber ++;
+                // list each patient in the bundle
+                foreach (Bundle.EntryComponent entry in patientBundle.Entry)
+                {
+                    System.Console.WriteLine($" - Entry{patientNumber , 3}:{entry.FullUrl}");
+                    //System.Console.WriteLine($"- {patient.Id,20} ");
+
+                    if (entry.Resource != null)
+                    {
+                        Patient patient = (Patient)entry.Resource;
+                        System.Console.WriteLine($" - Id: {patient.Id}");
+
+                        if (patient.Name.Count > 0)
+                        {
+                           System.Console.WriteLine($" - Name: {patient.Name[0].ToString()}");
+                        }
+                    }
+
+                    patientNumber ++;
+                }
+
+                // get more result
+                patientBundle = fhirClient.Continue(patientBundle);
             }
+            
         } 
     }
 }
