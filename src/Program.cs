@@ -13,7 +13,15 @@ namespace fhir_cs_tutorial_01
     /// </summary>
     public static class Program
     {
-        private const string _fhirServer = "https://hapi.fhir.org/baseR4"; // https://hapi.fhir.org/baseR4".
+
+        private static readonly Dictionary<string , string> _fhirServers = new Dictionary<string , string>()
+        {
+            {"PublicVonk", "http://vonk.fire.ly"},
+            {"PublicHAPI","https://hapi.fhir.org/baseR4"},
+            {"Local","http://localhost:8080/fhir"}
+        };
+
+        private static readonly string _fhirServer = _fhirServers["Local"];
 
         static void Main(string[] args)
         {
@@ -22,16 +30,41 @@ namespace fhir_cs_tutorial_01
                 PreferredFormat = ResourceFormat.Json,
                 PreferredReturn = Prefer.ReturnRepresentation
             };
+
+            List<Patient> patients = GetPatients(fhirClient);
+
+            System.Console.WriteLine($"Found {patients.Count}");
+        }
+
+        static List<Patient> GetPatients(
+            FhirClient fhirClient,
+            string[] patientCriteria = null,
+            int maxPatient = 20,
+            bool onlyWithencounter=false
+
+        )
+        {
+            List<Patient> patients = new List<Patient>();
+
+            Bundle patientBundle;
+            if ((patientCriteria == null )|| (patientCriteria.Length == 0))
+            {
+                patientBundle = fhirClient.Search<Patient>();
+
+            }
+            else
+            {
+                patientBundle  = fhirClient.Search<Patient>(patientCriteria);
+
+            }
+
+
             
-
-            Bundle patientBundle = fhirClient.Search<Patient>(new string[] {"name=test"});
-
-            int patientNumber = 0;
             List<string> patientsWithEncounters = new List<string>();
 
             while (patientBundle != null)
             {
-                Console.WriteLine($"Total: {patientBundle.Total} Entry count: {patientBundle.Entry.Count}");
+                Console.WriteLine($"patient Bundle.Total: {patientBundle.Total} Entry count: {patientBundle.Entry.Count}");
 
                 // list each patient in the bundle
                 foreach (Bundle.EntryComponent entry in patientBundle.Entry)
@@ -47,14 +80,14 @@ namespace fhir_cs_tutorial_01
 
                         Bundle encounterBundle = fhirClient.Search<Encounter>(new string[]{$"patient=Patient/{patient.Id}", });
 
-                        if (encounterBundle.Total == 0)
+                        if (onlyWithencounter && encounterBundle.Total == 0)
                         {
                             continue;
                         }
 
-                        patientsWithEncounters.Add(patient.Id);
+                        patients.Add(patient);
 
-                        System.Console.WriteLine($" - Entry{patientNumber, 3}:{entry.FullUrl}");
+                        System.Console.WriteLine($" - Entry{patients.Count, 3}:{entry.FullUrl}");
                         System.Console.WriteLine($"- {patient.Id} ");
 
                         if (patient.Name.Count > 0)
@@ -62,20 +95,22 @@ namespace fhir_cs_tutorial_01
                            System.Console.WriteLine($" - Name: {patient.Name[0].ToString()}");
                         }
 
+                        if (encounterBundle.Total > 0)
+                        {
                         Console.WriteLine($" - Encounter Total: {encounterBundle.Total} Entry count: {patientBundle.Entry.Count}");
-
+                        }
                     }
 
-                    patientNumber ++;
+                    
 
-                    if (patientsWithEncounters.Count >= 3)
+                    if (patients.Count >= maxPatient)
                     {
                         break;
                     }
 
                 }
 
-                if (patientsWithEncounters.Count >= 3)
+                if (patients.Count >= maxPatient)
                 {
                     break;
                 }
@@ -84,6 +119,7 @@ namespace fhir_cs_tutorial_01
                 patientBundle = fhirClient.Continue(patientBundle);
             }
             
+            return patients;
         } 
     }
 }
