@@ -52,12 +52,21 @@ namespace fhir_cs_tutorial_01
             Patient firstPatient = ReadPatient(fhirClient, firstId);
             System.Console.WriteLine($"Read back patient : {firstPatient.Name[0].ToString()}");
             
+            UpdatePatient(fhirClient, firstPatient);
 
+            Patient updated = UpdatePatient(fhirClient, firstPatient);
+            Patient readFinal = ReadPatient(fhirClient, firstId);
 
             return 0;
         }
 
-        static void UpdatePatient(FhirClient fhirClient, Patient patient)
+        /// <summary>
+        /// Update  a given patient 
+        /// </summary>
+        /// <param name="fhirClient"></param>
+        /// <param name="patient"></param>
+        /// <returns>an Updated Patient</returns>
+        static Patient UpdatePatient(FhirClient fhirClient, Patient patient)
         {
             patient.Telecom.Add(new ContactPoint()
             {
@@ -68,7 +77,7 @@ namespace fhir_cs_tutorial_01
 
             patient.Gender = AdministrativeGender.Male;
 
-            fhirClient.Update<Patient>(patient);
+            return fhirClient.Update<Patient>(patient);
         }
 
         /// <summary>
